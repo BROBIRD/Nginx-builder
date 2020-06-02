@@ -130,7 +130,7 @@ def prepare_rules(source_dir, downloaded_openssl, downloaded_modules):
                 output_file.write(config.MODULESDIR)
 
 
-def prepare_rules_rpm(source_dir, downloaded_modules, modules_dir, revision):
+def prepare_rules_rpm(source_dir, downloaded_openssl, downloaded_modules, modules_dir, revision):
     """
     Внесение правил сборки в spec файл
     :param source_dir:
