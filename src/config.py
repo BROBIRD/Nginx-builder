@@ -28,24 +28,29 @@ DEFAULT_CONFIGURE_PARAMS = [
     "--prefix=/etc/nginx",
     "--sbin-path=/usr/sbin/nginx",
     "--conf-path=/etc/nginx/nginx.conf",
-    "--modules-path=/usr/lib/nginx/modules",
+    "--modules-path=/usr/lib64/nginx/modules",
     "--error-log-path=/var/log/nginx/error.log",
     "--pid-path=/var/run/nginx.pid",
-    "--lock-path=/var/lock/nginx.lock",
+    "--lock-path=/var/run/nginx.lock",
     "--http-log-path=/var/log/nginx/access.log",
     "--http-client-body-temp-path=/var/cache/nginx/client_temp",
     "--http-proxy-temp-path=/var/cache/nginx/proxy_temp",
     "--http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp",
     "--http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp",
     "--http-scgi-temp-path=/var/cache/nginx/scgi_temp",
-    "--with-debug",
     "--user=nginx",
     "--group=nginx",
-    "--with-pcre-jit",
     "--with-compat",
     "--with-file-aio",
     "--with-threads",
+    "--with-http_dav_module",
+    "--with-http_flv_module",
+    "--with-http_mp4_module",
+    "--with-http_random_index_module",
+    "--with-mail",
+    "--with-mail_ssl_module",
     "--with-stream",
+    "--with-stream_ssl_preread_module",
     "--with-cc-opt=\"${CFLAGS}\"",
     "--with-ld-opt=\"${LDFLAGS}\""
 ]
@@ -54,7 +59,7 @@ DEFAULT_CONFIGURE_PARAMS = [
 MODULESDIR = 'export MODULESDIR = $(CURDIR)/debian/modules'
 
 # Адрес эл. почты для указания при сборке
-EMAIL_CREATOR = "nginx-builder@tinkoff.ru"
+EMAIL_CREATOR = "brobirdcn@gmail.com"
 
 # Тип лицензии для указания при сборке
 LICENSE_TYPE = "gpl"

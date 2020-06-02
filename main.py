@@ -39,6 +39,7 @@ def build_deb(config, revision):
     scripts_archive_name = downloader.download_package_scripts_deb(config["nginx_version"])
     src_archive_name = downloader.download_source(config["nginx_version"])
     downloaded_modules = downloader.download_modules(config["modules"])
+    downloaded_openssl = downloader.download_openssl_src(config["openssl-version"])
     downloader.download_dependencies_deb(config["modules"])
     package_name = builder.build_deb(
         config["nginx_version"],
@@ -62,6 +63,7 @@ def build_rpm(config, revision):
     downloader.download_package_scripts_rpm()
     downloader.download_source_rpm(config["nginx_version"])
     downloaded_modules = downloader.download_modules(config["modules"])
+    downloaded_openssl = downloader.download_openssl_src(config["openssl-version"])
     downloader.download_dependencies_rpm(config["modules"])
     package_name = builder.build_rpm(
         config["nginx_version"],

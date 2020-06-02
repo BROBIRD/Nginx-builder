@@ -112,6 +112,7 @@ def prepare_rules(source_dir, downloaded_modules):
     :return:
     """
     configure_command = ["./configure"] + config.DEFAULT_CONFIGURE_PARAMS
+    configure_command.append("--with-openssl={}".format(os.path.join(config.SRC_PATH, "openssl")))
     for module in downloaded_modules:
         configure_command.append("--add-module=$(MODULESDIR)/{}".format(module))
     configure_command = " ".join(configure_command)
@@ -139,6 +140,7 @@ def prepare_rules_rpm(source_dir, downloaded_modules, modules_dir, revision):
     :return:
     """
     configure_command = ["./configure"] + config.DEFAULT_CONFIGURE_PARAMS
+    configure_command.append("--with-openssl={}".format(os.path.join(config.SRC_PATH, "openssl")))
     for module in downloaded_modules:
         configure_command.append("--add-module={}/{}".format(modules_dir, module))
     configure_command = " ".join(configure_command)

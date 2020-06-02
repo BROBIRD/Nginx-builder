@@ -1,0 +1,13 @@
+version: '3'
+services:
+  rpm:
+    build:
+      dockerfile: Dockerfile.centos
+    volumes:
+      - ./rpm:/nginx-builder
+  deb:
+    build: 
+      dockerfile: Dockerfile.ubuntu
+    volumes: 
+      - ./deb:/nginx-builder
+    
