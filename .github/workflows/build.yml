@@ -1,6 +1,7 @@
 name: Nginx Build
 on: push
 jobs:
+  build:
     name: Build RPMs
     runs-on: ubuntu-latest
     steps:
