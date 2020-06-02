@@ -11,7 +11,7 @@ jobs:
           run: docker build -f ./Dockerfile.centos -t brobird/nginx:centos .
         - name: Docker run and collect RPMs
           run: |
-            docker run -d -name nginx brobird/nginx:centos
+            docker run -d --name nginx brobird/nginx:centos
             docker cp nginx:/nginx-builder/rpms /tmp/
             ls -hal /tmp/rpms
         - name: Upload Release
