@@ -44,6 +44,7 @@ def build_deb(config, revision):
     package_name = builder.build_deb(
         config["nginx_version"],
         src_archive_name,
+        downloaded_openssl,
         downloaded_modules,
         scripts_archive_name,
         config["control"],
@@ -67,6 +68,7 @@ def build_rpm(config, revision):
     downloader.download_dependencies_rpm(config["modules"])
     package_name = builder.build_rpm(
         config["nginx_version"],
+        downloaded_openssl,
         downloaded_modules,
         revision
     )

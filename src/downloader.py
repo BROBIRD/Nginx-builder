@@ -78,6 +78,7 @@ def download_source_rpm(src_version):
 
 def download_openssl_src(openssl_version="1.1.1g"):
     logger.info("Downloading OpenSSL source...")
+    common_utils.ensure_directory(os.path.join(config.SRC_PATH, "openssl"))
     file_name = "openssl-{}.tar.gz".format(openssl_version)
     with open(os.path.join(config.SRC_PATH, "openssl", file_name), "wb") as file:
         response = get("https://www.openssl.org/source/{}".format(file_name))

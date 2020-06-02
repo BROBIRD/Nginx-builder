@@ -33,7 +33,7 @@ def build_deb(version, src_archive_name, downloaded_modules, scripts_archive_nam
 
     scripts_dir = os.path.join(source_dir, "debian")
     prepare_changelog(scripts_dir, version, revision)
-    prepare_rules(scripts_dir, downloaded_modules)
+    prepare_rules(scripts_dir, downloaded_openssl, downloaded_modules)
     prepare_nginx_dirs(scripts_dir)
 
     change_control(scripts_dir, control_file_params)
@@ -60,7 +60,7 @@ def build_deb(version, src_archive_name, downloaded_modules, scripts_archive_nam
     return os.path.join(config.SRC_PATH, package_name)
 
 
-def build_rpm(version, downloaded_modules, revision):
+def build_rpm(version, downloaded_openssl, downloaded_modules, revision):
     """
     Сборка rpm пакета
     :param version:
@@ -77,7 +77,7 @@ def build_rpm(version, downloaded_modules, revision):
     rpms_dir = os.path.join(top_dir, "RPMS")
 
     shutil.move(modules_dir, scripts_dir)
-    prepare_rules_rpm(specs_dir, downloaded_modules, os.path.join(scripts_dir, "modules"), revision)
+    prepare_rules_rpm(specs_dir, downloaded_openssl, downloaded_modules, os.path.join(scripts_dir, "modules"), revision)
     common_utils.execute_command("rpmbuild -bb nginx.spec", specs_dir)
     package_name = None
     for file in os.listdir(os.path.join(rpms_dir, config.PLATFORM_ARCH)):
@@ -104,7 +104,7 @@ def prepare_changelog(source_dir, version, revision):
             output_file.write(line)
 
 
-def prepare_rules(source_dir, downloaded_modules):
+def prepare_rules(source_dir, downloaded_openssl, downloaded_modules):
     """
     Внесение нужных параметров в файл rules
     :param source_dir:
@@ -112,7 +112,7 @@ def prepare_rules(source_dir, downloaded_modules):
     :return:
     """
     configure_command = ["./configure"] + config.DEFAULT_CONFIGURE_PARAMS
-    configure_command.append("--with-openssl={}".format(os.path.join(config.SRC_PATH, "openssl")))
+    configure_command.append("--with-openssl={}/{}".format(os.path.join(config.SRC_PATH, "openssl"), downloaded_openssl))
     for module in downloaded_modules:
         configure_command.append("--add-module=$(MODULESDIR)/{}".format(module))
     configure_command = " ".join(configure_command)
@@ -140,7 +140,7 @@ def prepare_rules_rpm(source_dir, downloaded_modules, modules_dir, revision):
     :return:
     """
     configure_command = ["./configure"] + config.DEFAULT_CONFIGURE_PARAMS
-    configure_command.append("--with-openssl={}".format(os.path.join(config.SRC_PATH, "openssl")))
+    configure_command.append("--with-openssl={}/{}".format(os.path.join(config.SRC_PATH, "openssl"), downloaded_openssl))
     for module in downloaded_modules:
         configure_command.append("--add-module={}/{}".format(modules_dir, module))
     configure_command = " ".join(configure_command)
