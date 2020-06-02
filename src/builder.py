@@ -10,7 +10,7 @@ import logging
 logger = logging.getLogger("builder")
 
 
-def build_deb(version, src_archive_name, downloaded_modules, scripts_archive_name, control_file_params, revision):
+def build_deb(version, src_archive_name, downloaded_openssl, downloaded_modules, scripts_archive_name, control_file_params, revision):
     """
     Сборка deb пакета
     :param version:
