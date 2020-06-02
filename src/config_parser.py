@@ -47,8 +47,8 @@ def parse_yaml(file_name):
         config['control'] = None
     if not config.get('modules'):
         config['modules'] = None
-    if not config.get('openssl'):
-        config['openssl'] = None
+    if not config.get('openssl_version'):
+        config['openssl_version'] = None
     return config
 
 
