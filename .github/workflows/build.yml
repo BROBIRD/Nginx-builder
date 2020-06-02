@@ -10,14 +10,14 @@ jobs:
         - name: Docker build
           run: docker build -f ./Dockerfile.centos -t brobird/nginx:centos .
         - name: Docker run and collect RPMs
-          run: docker run -v ./rpm:/nginx-builder brobird/nginx:centos -d
+          run: docker run -v /tmp/rpm:/nginx-builder brobird/nginx:centos -d
         - name: Upload Release
           uses: softprops/action-gh-release@v1
           if: startsWith(github.ref, 'refs/tags/')
           env:
             GITHUB_TOKEN: ${{ secrets. GH_TOKEN }}
           with:
-            files: rpm/*.rpm
+            files: /tmp/rpm/*.rpm
             draft: false
             prerelease: false
   DEB-build:
@@ -29,14 +29,14 @@ jobs:
         - name: Docker build
           run: docker build -f ./Dockerfile.ubuntu -t brobird/nginx:ubuntu .
         - name: Docker run and collect DEBs
-          run: docker run -v ./deb:/nginx-builder brobird/nginx:ubuntu -d
+          run: docker run -v /tmp/deb:/nginx-builder brobird/nginx:ubuntu -d
         - name: Upload Release
           uses: softprops/action-gh-release@v1
           if: startsWith(github.ref, 'refs/tags/')
           env:
             GITHUB_TOKEN: ${{ secrets. GH_TOKEN }}
           with:
-            files: deb/*.deb
+            files: /tmp/deb/*.deb
             draft: false
             prerelease: false
 
