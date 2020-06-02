@@ -18,5 +18,4 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 WORKDIR /nginx-builder
 COPY . /nginx-builder
 RUN pip3.6 install -r requirements.txt --no-cache-dir && \
-    ./main.py build -f config.rpm.yaml && \
-    ls -hal
+    ./main.py build -f config.rpm.yaml
