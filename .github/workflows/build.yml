@@ -8,7 +8,7 @@ jobs:
         - name: Check out
           uses: actions/checkout@v2
         - name: Docker build
-          run: docker build -f ./Dockerfile.centos -t brobird/nginx:centos
+          run: docker build -f ./Dockerfile.centos -t brobird/nginx:centos .
         - name: Docker run and collect RPMs
           run: docker run -d brobird/nginx:centos -v ./rpm:/nginx-builder
         - name: Upload Release
@@ -27,7 +27,7 @@ jobs:
         - name: Check out
           uses: actions/checkout@v2
         - name: Docker build
-          run: docker build -f ./Dockerfile.ubuntu -t brobird/nginx:ubuntu
+          run: docker build -f ./Dockerfile.ubuntu -t brobird/nginx:ubuntu .
         - name: Docker run and collect DEBs
           run: docker run -d brobird/nginx:ubuntu -v ./deb:/nginx-builder
         - name: Upload Release
