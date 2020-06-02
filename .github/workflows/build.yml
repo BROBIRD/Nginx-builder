@@ -12,7 +12,7 @@ jobs:
         - name: Docker run and collect RPMs
           run: |
             docker run -d -name nginx brobird/nginx:centos
-            docker cp nginx nginx:/nginx-builder/rpms /tmp/
+            docker cp nginx:/nginx-builder/rpms /tmp/
             ls -hal /tmp/rpms
         - name: Upload Release
           uses: softprops/action-gh-release@v1
