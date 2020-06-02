@@ -8,4 +8,5 @@ def public_local(package_name):
     :(package_name:
     :return:
     """
-    shutil.move(package_name, "/nginx-builder/rpms")
+    common_utils.ensure_directory("/nginx-builder/rpms/")
+    shutil.move(package_name, "/nginx-builder/rpms/")
